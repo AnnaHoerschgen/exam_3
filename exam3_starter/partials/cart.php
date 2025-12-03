@@ -1,6 +1,6 @@
 <h2>Your Cart</h2>
 
-<?php $records = $records_in_cart ?? [];?>
+<?php $records = $records_in_cart ?? []; ?>
 
 <?php if (empty($records)): ?>
     <p>Your cart is empty.</p>
@@ -18,10 +18,10 @@
         <tbody>
             <?php foreach ($records as $row): ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?= htmlspecialchars($row['title']) ?></td>
+                    <td><?= htmlspecialchars($row['artist']) ?></td>
+                    <td><?= htmlspecialchars($row['name']) ?></td>
+                    <td>$<?= htmlspecialchars($row['price']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

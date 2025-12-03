@@ -1,7 +1,22 @@
+<?php
+if ($_POST) { // checks for post method
+    // take username and password inputs
+    $username = trim(filter_input(INPUT_POST, 'username'));
+    $password = trim(filter_input(INPUT_POST, 'password'));
+    $match = user_find_by_username($username);
+
+    if (is_null($match)) {
+        $login_error = "This user was not found. Please re-check your username and try again - or consider creating an account.";
+    } elseif (password_hash($password, PASSWORD_DEFAULT) !== $match['password_hash']) {
+        $login_error = "Please check that your password is correct, then try again.";
+    }
+}
+?>
+
 <h2>Login</h2>
 
 <?php if (!empty($login_error)): ?>
-    <div class="alert alert-danger"></div>
+    <div class="alert alert-danger"><?php echo ($login_error) ?></div>
 <?php endif; ?>
 
 <form method="post">

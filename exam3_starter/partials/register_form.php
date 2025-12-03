@@ -1,3 +1,23 @@
+<?php
+require_once __DIR__ . "/../data/functions.php";
+
+if ($_POST) { // checks for post method
+    // take username and password inputs
+    $username = trim(filter_input(INPUT_POST, 'username'));
+    $full_name = filter_input(INPUT_POST, 'full_name');
+    $password = trim(filter_input(INPUT_POST, 'password'));
+    
+    if (!is_null(user_find_by_username($username))) {
+        $register_error = "A user with this username has been found. Please try another username.";
+    } else {
+        user_create($username, $full_name, password_hash($password, PASSWORD_DEFAULT));
+        header("Location: " .
+        __DIR__ . "/../?view=list");
+        exit();
+    }
+}
+?>
+
 <h2>Register</h2>
 
 <?php if (!empty($register_error)): ?>

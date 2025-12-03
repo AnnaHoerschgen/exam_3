@@ -104,6 +104,12 @@ switch ($action) {
         }
         $view = 'checkout_success';
         break;
+
+    case 'orders':
+        require_login();
+        //
+        break;
+    
     case 'create':
         $title    = trim((string)(filter_input(INPUT_POST, 'title') ?? ''));
         $artist   = trim((string)(filter_input(INPUT_POST, 'artist') ?? ''));
@@ -149,6 +155,8 @@ switch ($action) {
         $view = 'updated';
         break;
 }
+
+// echo("<p>{$view}</p>");
 
 if ($view === 'cart') {
     $cart_ids = $_SESSION['cart'] ?? [];
